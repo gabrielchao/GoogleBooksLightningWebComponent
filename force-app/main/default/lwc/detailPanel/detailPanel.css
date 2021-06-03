@@ -1,0 +1,58 @@
+.container {
+    border: 1px rgb(168, 166, 166) solid;
+    border-radius: 5px;
+    background-color: white;
+    margin: 5px;
+    padding: 16px;
+    min-width: 200px;
+    max-width: 900px;
+    display: flex;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 100px;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    display: flex;
+    margin: 5px;
+    padding: 2px;
+}
+
+.column:info-column {
+    flex-grow: 1;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.subtitle {
+    font-style: italic;
+}
+
+.product-img {
+    max-width: 100px;
+    margin: 5px;
+    padding: 2px
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: rgb(159, 159, 159);
+}
+a:visited {
+    color: green;
+}
+a:hover {
+    color: hotpink;
+}
+a:active {
+    color: blue;
+}

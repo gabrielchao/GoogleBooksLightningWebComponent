@@ -1,0 +1,20 @@
+.container {
+    margin: 8px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.right {
+    text-align: right;
+}
+
+.centered {
+    font-size: 0.9rem;
+    text-align: center;
+    align-self: center;
+    padding: 0 12px;
+}

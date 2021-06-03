@@ -1,0 +1,71 @@
+<template>
+    <div class="wrapper">
+    <header class="header">Search for books on Google and add them directly to Salesforce.</header>
+    <section>
+        <div onkeyup={handleSearchKeyUp}>
+            <lightning-input
+                name="enter-search"
+                label="Search for books"
+                type="search"
+            ></lightning-input>
+        </div>
+        <div class="row">
+            <div class="stretcher">
+                <lightning-input
+                    label="Author"
+                    placeholder="Filter by author"
+                    type="text"
+                    onchange={handleAuthorChange}
+                ></lightning-input>
+            </div>
+            <div class = "stretcher">
+                <lightning-input
+                    label="Publisher"
+                    placeholder="Filter by publisher"
+                    type="text"
+                    onchange={handlePublisherChange}
+                ></lightning-input>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div if:true={volumesData}>
+            <div class="column">
+                <div>
+                    <c-paginator
+                        startindex={startDisplayIndex}
+                        endindex={endDisplayIndex}
+                        totalindices={volumesData.totalItems}
+                        onnextpage={handleNextPage}
+                        onpreviouspage={handlePreviousPage}>
+                    </c-paginator>
+                    <c-book-list 
+                        items={volumesData.items}
+                        onadd={handleAddItem}
+                        oncardclick={handleCardClick}>
+                    </c-book-list>
+                    <c-paginator
+                        startindex={startDisplayIndex}
+                        endindex={endDisplayIndex}
+                        totalindices={volumesData.totalItems}
+                        onnextpage={handleNextPage}
+                        onpreviouspage={handlePreviousPage}>
+                    </c-paginator>
+                </div>
+                <div>
+                    <div class="spacetaker"></div>
+                    <c-detail-panel
+                        item={selectedItem}>
+                    </c-detail-panel>
+                </div>
+            </div>
+        </div>
+        <div if:true={error}>
+            <p>{error}</p>
+        </div>
+        <div if:true={loading}>
+            <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+        </div>
+    </section>
+    </div>
+</template>

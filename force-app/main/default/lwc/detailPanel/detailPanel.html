@@ -1,0 +1,24 @@
+<template>
+    <div class="container">
+        <div if:true={item}>
+            <div if:true={item.volumeInfo.imageLinks}>
+                <img class="product-img" src={item.volumeInfo.imageLinks.thumbnail}></img>
+            </div>
+            <div class="title">{item.volumeInfo.title}</div>
+            <div if:true={item.volumeInfo.subtitle} class="subtitle">{item.volumeInfo.subtitle}</div>
+            <p>Authors: {item.volumeInfo.authors}</p>
+            <p>Publisher: {item.volumeInfo.publisher}</p>
+            <p>Published Date: {item.volumeInfo.publishedDate}</p>
+            <p>Page Count: {item.volumeInfo.pageCount}</p>
+            <p>Categories: {item.volumeInfo.categories}</p>
+            <template for:each={identifiers} for:item="identifier">
+                <p key={identifier}>{identifier}</p>
+            </template>
+            <p><br/></p>
+            <p>{item.volumeInfo.description}</p>
+        </div>
+        <div if:false={item}>
+            Click a book to view its details.
+        </div>
+    </div>
+</template>
