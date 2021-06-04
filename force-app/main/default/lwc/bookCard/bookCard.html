@@ -1,42 +1,28 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="column">
-                <div if:true={item.volumeInfo.imageLinks}>
-                    <img class="product-img" src={item.volumeInfo.imageLinks.thumbnail}></img>
+            <div class="detail-box">
+                <div>
+                    <div class="title">{item.volumeInfo.title}</div>
+                    <p>Authors: {authors}</p>
+                    <p>Publisher: {item.volumeInfo.publisher}</p>
                 </div>
             </div>
-            <div class="info-column">
-                <div>
-                    <div class="row">
-                        <div class="detail-box">
-                            <div>
-                                <div class="title">{item.volumeInfo.title}</div>
-                                <p>Authors: {authors}</p>
-                                <p>Publisher: {item.volumeInfo.publisher}</p>
-                            </div>
-                        </div>
-                        <div class="button-box">
-                            <div if:true={isNonexistent}>
-                                <lightning-button-icon icon-name="utility:add" alternative-text="Add book"
-                                    class="slds-m-right_xx-small" title="Add book" onclick={handleAddClick}>
-                                </lightning-button-icon>
-                            </div>
-                            <div if:true={isExists}>
-                                <lightning-button-icon icon-name="utility:check" alternative-text="Title in library"
-                                    class="slds-m-right_xx-small" title="Book in library">
-                                </lightning-button-icon>
-                            </div>
-                            <div if:true={isLoading}>
-                                <lightning-button-icon icon-name="utility:spinner" alternative-text="Loading"
-                                    class="slds-m-right_xx-small" title="Loading">
-                                </lightning-button-icon>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="limited-text">{item.volumeInfo.description}</div>
-                    </div>
+            <div class="button-box">
+                <div if:true={isNonexistent}>
+                    <lightning-button-icon icon-name="utility:add" alternative-text="Add book"
+                        class="slds-m-right_xx-small" title="Add book" onclick={handleAddClick}>
+                    </lightning-button-icon>
+                </div>
+                <div if:true={isExists}>
+                    <lightning-button-icon icon-name="utility:check" alternative-text="Title in library"
+                        class="slds-m-right_xx-small" title="Book in library">
+                    </lightning-button-icon>
+                </div>
+                <div if:true={isLoading}>
+                    <lightning-button-icon icon-name="utility:spinner" alternative-text="Loading"
+                        class="slds-m-right_xx-small" title="Loading">
+                    </lightning-button-icon>
                 </div>
             </div>
         </div>

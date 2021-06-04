@@ -56,6 +56,14 @@ export default class GoogleBooks extends LightningElement {
         }
     }
 
+    handleFilterKeyUp(evt) {
+        const isEnterKey = evt.keyCode === 13;
+        if(isEnterKey) {
+            this.startIndex = 0;
+            this.search();
+        }
+    }
+
     handleAuthorChange(evt) {
         this.authorTerm = evt.target.value;
     }
@@ -91,8 +99,16 @@ export default class GoogleBooks extends LightningElement {
             startIndex: this.startIndex,
             maxResults: this.itemsPerPage
         })
-        .then(volumesJson => {
-            const vols = JSON.parse(volumesJson);
+        .then(result => {
+            const vols = JSON.parse(result);
+            if(vols.items == undefined) {
+                if(vols.error) {
+                    throw new Error(vols.error.message);
+                }
+                else {
+                    throw new Error('Unknown error occurred.');
+                }
+            }
             vols.items = vols.items.filter(item => item.volumeInfo.authors);
             this.volumesData = vols;
             this.error = false;

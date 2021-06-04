@@ -44,10 +44,8 @@ export default class BookCard extends LightningElement {
             title: this.title,
             authors: this.authors
         }).then(result => {
-            console.log("result: " + result);
             this.databaseStatus = result ? "exists" : "nonexistent";
         }).catch(err => {
-            console.log(err);
             this.databaseStatus = "nonexistent";
         })
     }

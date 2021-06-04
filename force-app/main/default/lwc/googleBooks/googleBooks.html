@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
     <header class="header">Search for books on Google and add them directly to Salesforce.</header>
-    <section>
+    <div class="searchbox">
         <div onkeyup={handleSearchKeyUp}>
             <lightning-input
                 name="enter-search"
@@ -10,7 +10,7 @@
             ></lightning-input>
         </div>
         <div class="row">
-            <div class="stretcher">
+            <div class="stretcher" onkeyup={handleFilterKeyUp}>
                 <lightning-input
                     label="Author"
                     placeholder="Filter by author"
@@ -18,7 +18,8 @@
                     onchange={handleAuthorChange}
                 ></lightning-input>
             </div>
-            <div class = "stretcher">
+            <div class="spacer"></div>
+            <div class="stretcher" onkeyup={handleFilterKeyUp}>
                 <lightning-input
                     label="Publisher"
                     placeholder="Filter by publisher"
@@ -27,7 +28,7 @@
                 ></lightning-input>
             </div>
         </div>
-    </section>
+    </div>
     <section>
         <div if:true={volumesData}>
             <div class="column">

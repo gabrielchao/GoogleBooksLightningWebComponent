@@ -2,6 +2,17 @@
     border: 1px rgb(168, 166, 166) solid;
     border-radius: 5px;
     background-color: #f3f2f2;
+    padding: 50px;
+}
+
+.header {
+    margin: 5px;
+}
+
+.searchbox {
+    border: 1px rgb(168, 166, 166) solid;
+    border-radius: 5px;
+    background-color: #ffffff;
     padding: 16px;
 }
 
@@ -25,4 +36,9 @@
 
 .spacetaker {
     min-height: 43px;
+}
+
+.spacer {
+    min-width: 16px;
+    max-width: 16px;
 }

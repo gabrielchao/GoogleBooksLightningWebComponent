@@ -14,8 +14,20 @@
             <template for:each={identifiers} for:item="identifier">
                 <p key={identifier}>{identifier}</p>
             </template>
-            <p><br/></p>
+            <p><br /></p>
             <p>{item.volumeInfo.description}</p>
+            <p><br /></p>
+            <div class="row">
+                <lightning-button-group>
+                    <lightning-button
+                        label="View Record">
+                    </lightning-button>
+                    <lightning-button
+                        label="Delete Record"
+                        variant="destructive">
+                    </lightning-button>
+                </lightning-button-group>
+            </div>
         </div>
         <div if:false={item}>
             Click a book to view its details.

@@ -6,10 +6,12 @@
     padding: 2px;
     max-width: 900px;
     display: flex;
+    cursor: pointer;
 }
 
 .row {
     display: flex;
+    flex-grow: 1;
 }
 
 .column {
@@ -20,9 +22,11 @@
 
 .column:info-column {
     flex-grow: 1;
+    width: 100%;
 }
 
 .detail-box {
+    flex-grow: 1;
     margin: 5px;
     padding: 2px;
 }
