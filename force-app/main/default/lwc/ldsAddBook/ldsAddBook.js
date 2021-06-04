@@ -25,12 +25,12 @@ export async function addBook(item) {
             publisherId = publisherRecord.id;
         } 
         try {
-            const authors = item.volumeInfo.authors.reduce((a, b) => a + ', ' + b);
+            // const authors = item.volumeInfo.authors.reduce((a, b) => a + ', ' + b);
             const titleRecordInput = {
                 apiName: TITLE_OBJECT.objectApiName,
                 fields: {
                     [TITLE_NAME_FIELD.fieldApiName]: item.volumeInfo.title,
-                    [TITLE_AUTHOR_FIELD.fieldApiName]: authors,
+                    [TITLE_AUTHOR_FIELD.fieldApiName]: item.volumeInfo.authors, // was reduced by googleBooks.search()
                     [TITLE_DESCRIPTION_FIELD.fieldApiName]: item.volumeInfo.description,
                     [TITLE_PUBLISHER_FIELD.fieldApiName]: publisherId
                 }

@@ -33,10 +33,4 @@ export default class BookList extends LightningElement {
             console.log(err);
         }
     }
-
-    @api
-    refreshCardButton(id) {
-        const card = this.template.querySelector(`[data-id="${id}"]`);
-        card.waitThenRefreshButton();
-    }
 }

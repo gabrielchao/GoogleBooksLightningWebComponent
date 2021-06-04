@@ -1,7 +1,8 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { addBook } from 'c/ldsAddBook';
 import callBooks from '@salesforce/apex/BooksDataController.callBooks';
+import titleExists from '@salesforce/apex/BooksDataController.titleExists';
 
 import { createRecord } from 'lightning/uiRecordApi';
 import PUBLISHER_OBJECT from '@salesforce/schema/Publisher__c';
@@ -19,7 +20,7 @@ export default class GoogleBooks extends LightningElement {
     publisherTerm = '';
     startIndex;
     itemsPerPage = 20;
-    volumesData;
+    @track volumesData;
     selectedItem;
     error;
     loading;
@@ -30,7 +31,8 @@ export default class GoogleBooks extends LightningElement {
         const item = this.volumesData.items[index];
         try {
             await addBook(item);
-            this.template.querySelector("c-book-list").refreshCardButton(id);
+            // this.template.querySelector("c-book-list").refreshCardButton(id);
+            this.volumesData.items[index].salesforceStatus = "exists";
             const toastEvent = new ShowToastEvent({
                 title: "Success",
                 message: "Book added!",
@@ -110,9 +112,25 @@ export default class GoogleBooks extends LightningElement {
                 }
             }
             vols.items = vols.items.filter(item => item.volumeInfo.authors);
-            this.volumesData = vols;
-            this.error = false;
-            this.loading = false;
+            let promises = [];
+            for(let item of vols.items) {
+                item.volumeInfo.authors = item.volumeInfo.authors.reduce((a, b) => a + ', ' + b);
+                item.salesforceStatus = "nonexistent";
+                promises.push(titleExists({
+                        title: item.volumeInfo.title,
+                        authors: item.volumeInfo.authors
+                    }).then(result => {
+                        item.salesforceStatus = result ? "exists" : "nonexistent";
+                    }).catch(err => {
+                        item.salesforceStatus = "nonexistent";
+                    })
+                );
+            }
+            Promise.allSettled(promises).then(results => {
+                this.volumesData = vols;
+                this.error = false;
+                this.loading = false;
+            });
         })
         .catch(error => {
             this.volumesData = false;
